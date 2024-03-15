@@ -22,11 +22,11 @@ def version(c):
 
 
 @task
-def test(c, report=False):
+def test(c, report=False, pty=False):
     """Run tests"""
     c.run(
         "pytest tests --durations=0 " + ("--cov-report html" if report else ""),
-        pty=True,
+        pty=pty,
     )
     c.run("flake8")
 

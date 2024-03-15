@@ -6,7 +6,9 @@ try:
     sys.path.insert(1, "")
     # print('in first import block')
     from src.grid.grid import Grid
-    from src.strategy.cross_hatching_and_backtracing_strategy import CrossHatchingAndBacktracingStrategy
+    from src.strategy.cross_hatching_and_backtracing_strategy import (
+        CrossHatchingAndBacktracingStrategy,
+    )
 
     # print('Direct execution of the test')
 except ImportError:
@@ -14,7 +16,9 @@ except ImportError:
     sys.path.insert(1, "../")
     # print('in second import block')
     from src.grid.grid import Grid
-    from src.strategy.cross_hatching_and_backtracing_strategy import CrossHatchingAndBacktracingStrategy
+    from src.strategy.cross_hatching_and_backtracing_strategy import (
+        CrossHatchingAndBacktracingStrategy,
+    )
 
     # print('Execution of the script from tests/ dir')
 finally:

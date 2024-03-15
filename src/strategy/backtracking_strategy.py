@@ -6,24 +6,24 @@ class SudokuBacktrackingStrategy(SudokuStrategy):
 
     def solveSudoku(self, grid: Grid):
 
-        # 'l' is a list variable that keeps the record of row and col in
-        l = grid.l
+        # 'empty_position' is a list variable that keeps the record of row and col in
+        empty_position = grid.find_empty_location()
 
-        if (not grid.find_empty_location(l)):
+        if not empty_position:
             return True
 
-        row = l[0]
-        col = l[1]
+        row = empty_position[0]
+        col = empty_position[1]
 
         for num in range(1, 10):
 
-            if (grid.isSafe( row, col, num)):
+            if grid.isSafe(row, col, num):
 
-                grid.grid[row][col] = num
+                grid.putNumber(row, col, num)
 
-                if (self.solveSudoku(grid)):
+                if self.solveSudoku(grid):
                     return True
 
-                grid.grid[row][col] = 0
+                grid.cleanCell(row, col)
 
         return False

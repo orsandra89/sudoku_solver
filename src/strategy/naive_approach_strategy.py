@@ -32,5 +32,5 @@ class SudokuNaiveApproachStrategy(SudokuStrategy):
                 if self.solveSudokuUsingNaiveApproach(grid, row, col + 1):
                     return True
 
-            grid.putNumber(row, col, 0)
+            grid.cleanCell(row, col)
         return False

@@ -11,7 +11,6 @@ class Grid:
             [0, 0, 0, 0, 0, 0, 0, 7, 4],
             [0, 0, 5, 2, 0, 6, 3, 0, 0],
         ]
-        self.l = [0, 0]
 
     def printGrid(self):
         for i in range(len(self.grid)):
@@ -43,17 +42,18 @@ class Grid:
     def putNumber(self, row, col, num):
         self.grid[row][col] = num
 
+    def cleanCell(self, row, col):
+        self.grid[row][col] = 0
+
     def emptyCell(self, row, col):
         return self.grid[row][col] == 0
 
     def nonEmptyCell(self, row, col):
         return not self.emptyCell(row, col)
 
-    def find_empty_location(self, l):
+    def find_empty_location(self):
         for row in range(len(self.grid)):
             for col in range(len(self.grid)):
-                if (self.grid[row][col] == 0):
-                    l[0] = row
-                    l[1] = col
-                    return True
-        return False
+                if self.grid[row][col] == 0:
+                    return [row, col]
+        return None

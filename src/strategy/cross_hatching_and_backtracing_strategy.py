@@ -6,17 +6,25 @@ class CrossHatchingAndBacktracingStrategy(SudokuStrategy):
     pos = {}
     rem = {}
     graph = {}
+
+    def __clean(self):
+        self.pos = {}
+        self.rem = {}
+        self.graph = {}
+
     def solveSudoku(self, grid: Grid):
+        self. __clean()
         self.build_pos_and_rem(grid)
 
-        # Sort the rem map in order to start with smaller number of elements to be filled first. Optimization for pruning
+        # Sort the rem map in order to start with smaller number of elements to be filled first.
+        # Optimization for pruning
         self.rem = {k: v for k, v in sorted(self.rem.items(), key=lambda item: item[1])}
 
         self.build_graph(grid)
 
         key_s = list(self.rem.keys())
         # Util called to fill the matrix
-        return self.fill_matrix(grid,0, key_s, 0, list(self.graph[key_s[0]].keys()))
+        return self.fill_matrix(grid, 0, key_s, 0, list(self.graph[key_s[0]].keys()))
 
     def fill_matrix(self, grid: Grid, k, keys, r, rows):
         for c in self.graph[keys[k]][rows[r]]:
@@ -33,7 +41,9 @@ class CrossHatchingAndBacktracingStrategy(SudokuStrategy):
                         continue
                 else:
                     if k < len(keys) - 1:
-                        if self.fill_matrix(grid, k + 1, keys, 0, list(self.graph[keys[k + 1]].keys())):
+                        if self.fill_matrix(
+                            grid, k + 1, keys, 0, list(self.graph[keys[k + 1]].keys())
+                        ):
                             return True
                         else:
                             grid.grid[rows[r]][c] = 0
